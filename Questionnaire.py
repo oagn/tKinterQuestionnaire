@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from Response import Response
+from DisplayResults import *
 
 
 class Questionnaire(Frame):
@@ -13,7 +14,7 @@ class Questionnaire(Frame):
         self.createTeamExpQuest()
         self.createProblems()
         self.createComments()
-        self.submitResponse()
+        self.createButtons()
 
     def createProgSelect(self):
         # Create widgets to select a degree programme from a list
@@ -139,11 +140,19 @@ class Questionnaire(Frame):
         self.entName = Entry(self)
         self.entName.grid(row=15, column=4, columnspan=2, sticky=E)
 
-    def submitResponse(self):
+    def createButtons(self):
         # Submit responses to the questionnaire
         butSubmit = Button(self, text='Submit', font=('MS', 13, 'bold'))
         butSubmit['command'] = self.storeResponse  # Note: no () after the method
         butSubmit.grid(row=16, column=2, columnspan=2)
+
+        butClear = Button(self, text='Clear', font=('MS', 13, 'bold'))
+        butClear['command'] = self.clearResponse  # Note: no () after the method
+        butClear.grid(row=16, column=4, columnspan=2)
+
+        butResults = Button(self, text='Show esults', font=('MS', 13, 'bold'))
+        butResults['command'] = self.openResultsWindow  # Note: no () after the method
+        butResults.grid(row=16, column=6, columnspan=2)
 
     def clearResponse(self):
         # Clear the Questionnaire
@@ -203,8 +212,13 @@ class Questionnaire(Frame):
         else:
             messagebox.showwarning("Entry Error", strMsg)
 
+    def openResultsWindow(self):
+        t1 = Toplevel(root)
 
-# Main
+        DisplayResults(t1)
+
+
+ # Main
 root = Tk()
 root.title("Teamwork Questionnaire")
 app = Questionnaire(root)
