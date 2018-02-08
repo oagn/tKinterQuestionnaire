@@ -150,7 +150,7 @@ class Questionnaire(Frame):
         butClear['command'] = self.clearResponse  # Note: no () after the method
         butClear.grid(row=16, column=4, columnspan=2)
 
-        butResults = Button(self, text='Show esults', font=('MS', 13, 'bold'))
+        butResults = Button(self, text='Show results', font=('MS', 13, 'bold'))
         butResults['command'] = self.openResultsWindow  # Note: no () after the method
         butResults.grid(row=16, column=6, columnspan=2)
 
@@ -204,7 +204,7 @@ class Questionnaire(Frame):
                            self.varCB4.get(), self.varCB5.get(), self.varCB6.get(),
                            self.txtComment.get(1.0, END), self.entName.get())
             db[Ans.respNo] = Ans
-            db.close
+            db.close()
 
             messagebox.showinfo("Questionnaire", "Questionnaire Submitted")
             self.clearResponse()

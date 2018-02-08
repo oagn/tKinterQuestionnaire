@@ -1,16 +1,17 @@
 from tkinter import *
 from Response import Response
 
+
 class DisplayResults(Frame):
     # GUI Setup
     def __init__(self, master):
         # Initialise Class
         Frame.__init__(self, master)
         self.pack()
+        self.retrieveResponse()
 
     def retrieveResponse(self):
         # retrieve responses from database
-
         # Initialise ALL THE COUNTERS!
         countAll = 0
         sumQ1All = 0.0
@@ -84,7 +85,7 @@ class DisplayResults(Frame):
         respNo = len(db)
 
         for i in range(1, respNo):
-            Ans = db(str(i))
+            Ans = db[str(i)]
 
             # update counters with values from current response
             countAll += 1
@@ -161,7 +162,7 @@ class DisplayResults(Frame):
         db.close()
 
         # Toal number of answers
-        self.txtDisplay = Text(self, height=14, width=85)
+        self.txtDisplay = Text(self, height=60, width=100)
         self.txtDisplay.tag_configure('boldfont', font=('MS', 13, 'bold'))
         self.txtDisplay.tag_configure('normfont', font=('MS', 13))
 
@@ -367,10 +368,5 @@ class DisplayResults(Frame):
                                P6Joints + '%%\n', 'normfont')
 
         self.txtDisplay['state'] = DISABLED
+        self.txtDisplay.pack()
 
-
-# Main
-root = Tk()
-root.title("Display Results")
-app = DisplayResults(root)
-root.mainloop()
